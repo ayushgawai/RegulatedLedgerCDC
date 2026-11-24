@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "regulated-ledger-cdc"
+version = "0.1.0"
+description = "Financial-grade change-data-capture and data-quality lakehouse service over a regulated transactional ledger"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+api = ["fastapi>=0.110", "uvicorn>=0.29"]
+airflow = ["apache-airflow>=2.9"]
+dev = ["pytest>=8", "httpx>=0.27"]
+
+[project.scripts]
+ledger-cdc = "regulated_ledger_cdc.cli:main"
+ledger-cdc-bench = "regulated_ledger_cdc.benchmark:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]
